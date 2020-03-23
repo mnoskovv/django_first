@@ -1,0 +1,19 @@
+{% extends "learming_logs_app/base.html" %}
+{% block header %}
+    <h2>Topics</h2>
+{% endblock header %}
+
+{% block content %}
+    <ul>
+      {% for topic in topics %}
+        <li>
+          <h4>
+            <a href="{% url 'learming_logs_app:topic' topic.id %}">{{ topic }}</a>
+          </h4>
+        </li>
+      {% empty %}
+        <li>No topics have been added yet.</li>
+      {% endfor %}
+    </ul>
+    <h4><a href="{% url 'learming_logs_app:new_topic' %}"> Add a new topic</a></h4>
+{% endblock content %}

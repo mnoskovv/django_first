@@ -32,7 +32,7 @@
                 <li><a href="{% url 'users:logout' %}?next={% url 'learming_logs_app:index'%}">log out</a></li>
             {% else %}
                 <li><a href="{% url 'users:register' %}">register</a></li>
-                <li><a href="{% url 'users:login' %}">log in</a></li>
+                <li><a href="{% url 'users:login_page' %}">log in</a></li>
             {% endif %}
         </ul> 
     </div><!--/.nav-collapse -->

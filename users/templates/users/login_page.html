@@ -4,7 +4,7 @@
 <h2>Log in to your account.</h2>
 {% endblock header %}
 {% block content %}
-    <form method="post" action="{% url 'users:login' %}" class="form">
+    <form method="post" action="{% url 'users:login_page' %}" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}

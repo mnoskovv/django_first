@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +26,7 @@ SECRET_KEY = 'bu5%p896p17knfm5bucp68r0aqpfezw)$^dt9hkve8p2s9!jv('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     # сторонние приложения
     'bootstrap3',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -56,10 +58,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'learning_log.urls'
 
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'users', 'templates'),
+    os.path.join(PROJECT_PATH, 'learming_logs_app', 'template'),
+    os.path.join(PROJECT_PATH, 'templates'),
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,'users/templates/'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

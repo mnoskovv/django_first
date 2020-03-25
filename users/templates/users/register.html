@@ -1,10 +1,52 @@
 {% extends 'learming_logs_app/base.html' %}
+{% load bootstrap3 %}
+{% load widget_tweaks %}
 {% block content %}
 
 <form method="POST" action="{% url 'users:register' %}">
     {% csrf_token%}
-    {{ form.as_p }}
-    <button name="submit">register</button>
+
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="form-group">
+        <label for="username">Username</label>
+
+        {{ form.username|add_class:"form-control"|attr:"id:username"|attr:"placeholder:Enter username"|attr:"aria-describedby:usernameHelp"}}
+        
+        <!-- <small id="usernameHelp" class="form-text text-muted">Some useful info.</small> -->
+    </div>
+
+    <div class="form-group">
+        <label for="password1">Password</label>
+
+        {{ form.password1|add_class:"form-control"|attr:"id:password1"|attr:"placeholder:Enter password"|attr:"aria-describedby:password1Help"}}
+        
+        <!-- <small id="password1Help" class="form-text text-muted">Some useful info.</small> -->
+    </div>
+
+    <div class="form-group">
+        <label for="password1">Confirm password</label>
+
+        {{ form.password2|add_class:"form-control"|attr:"id:password2"|attr:"placeholder:Repeat password"|attr:"aria-describedby:password2Help"}}
+        
+        <!-- <small id="password2Help" class="form-text text-muted">Some useful info.</small> -->
+    </div>
+
+    <button name="submit" class="btn btn-primary">register</button>
+
     <input type="hidden" name="next" value="{% url 'learming_logs_app:index' %}" />
 </form>
 

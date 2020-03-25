@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     # сторонние приложения
     'bootstrap3',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

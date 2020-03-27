@@ -24,10 +24,11 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 SECRET_KEY = 'bu5%p896p17knfm5bucp68r0aqpfezw)$^dt9hkve8p2s9!jv('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# ALLOWED_HOSTS = ["learning-log-personal.herokuapp.com"]
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -58,17 +59,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'learning_log.urls'
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'users', 'templates'),
-    os.path.join(PROJECT_PATH, 'learming_logs_app', 'template'),
-    os.path.join(PROJECT_PATH, 'templates'),
-)
+# TEMPLATE_DIRS = (
+#     os.path.join(PROJECT_PATH, 'users', 'templates'),
+#     os.path.join(PROJECT_PATH, 'learming_logs_app', 'templates'),
+#     os.path.join(PROJECT_PATH, 'learning_log/templates'),
+# )
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'users/templates/'),
+            os.path.join(BASE_DIR, 'learning_log/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {

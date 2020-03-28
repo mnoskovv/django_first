@@ -24,10 +24,10 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 SECRET_KEY = 'bu5%p896p17knfm5bucp68r0aqpfezw)$^dt9hkve8p2s9!jv('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ["learning-log-personal.herokuapp.com"]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["learning-log-personal.herokuapp.com"]
+# ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -151,10 +151,16 @@ if os.getcwd() == '/app':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Разрешены все заголовки хостов.
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ["learning-log-personal.herokuapp.com"]
     # Конфигурация статических ресурсов
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'), 
     )
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'), 
+)

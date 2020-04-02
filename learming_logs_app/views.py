@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
@@ -29,6 +30,19 @@ def topic(request, topic_id):
     if topic.owner != request.user:
         raise Http404
     entries = topic.entry_set.order_by('-date_added')
+
+
+    paginator = Paginator(entries, 4)
+    page = request.GET.get('page')
+    try:
+        entries = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        entries = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        entries = paginator.page(paginator.num_pages)
+
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learming_logs_app/topic.html', context)
 

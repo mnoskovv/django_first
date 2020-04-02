@@ -31,6 +31,44 @@
             onclick="updateModal('deleteTopicModalLink','{% url 'learming_logs_app:delete_topic' topic.id%}')">delete</a> delete topic?
         {% endfor %}
 
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {% if entries.has_previous %}
+        <li class="page-item">
+          <a href="?page={{ entries.previous_page_number }}" class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
+
+        {% for num in entries.paginator.page_range %}
+          {% if num == entries.number %}
+          <li class="page-item">
+              <span class="current"><b>{{ num }}</b></span>
+          </li>
+          {% else %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ num }}"> {{ num }}</a>
+          </li>
+          {% endif %} 
+        {% endfor %}
+        
+
+        {% if entries.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ entries.next_page_number }}">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+        {% endif %}
+        
+
+
         <!-- Modal windows -->
         <div class="modal fade" id="deleteEntryModal" tabindex="-1" role="dialog" aria-labelledby="deleteEntryModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

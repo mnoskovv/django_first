@@ -94,4 +94,12 @@ def delete_entry(request, entry_id):
     entry.delete()
     
     return HttpResponseRedirect(reverse('learming_logs_app:topic', args = [topic.id]))
-    
+
+@login_required
+def delete_topic(request, topic_id):
+    topic = Topic.objects.get(id=topic_id)
+
+    topic.delete()
+
+    return HttpResponseRedirect(reverse('learming_logs_app:topics'))
+

@@ -24,7 +24,7 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 SECRET_KEY = 'bu5%p896p17knfm5bucp68r0aqpfezw)$^dt9hkve8p2s9!jv('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["learning-log-personal.herokuapp.com"]
 # ALLOWED_HOSTS = ["*"]

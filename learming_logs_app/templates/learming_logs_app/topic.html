@@ -17,8 +17,9 @@
                             <a href="{% url 'learming_logs_app:edit_entry' entry.id %}"> edit entry</a>
                         </small>
                         <small>
+                          {% url 'learming_logs_app:delete_entry' entry.id as the_url %}
                             <a href="#" class="pull-right" data-toggle="modal" data-target="#deleteEntryModal" 
-                            onclick="updateModal('delEntryModalLink', '{% url 'learming_logs_app:delete_entry' entry.id%}')">delete entry</a>
+                            onclick="updateModal('delEntryModalLink', '{{the_url}}')">delete entry</a>
                         </small>
                     </h4>
                 </div>
@@ -27,8 +28,9 @@
                 </div>
             </div> <!-- panel -->
         {% empty %}
+        {% url 'learming_logs_app:delete_topic' topic.id as the_url%}
             There are no entries for this topic yet. Would you like to <a href="#" data-toggle="modal" data-target="#deleteTopicModal"
-            onclick="updateModal('deleteTopicModalLink','{% url 'learming_logs_app:delete_topic' topic.id%}')">delete</a> delete topic?
+            onclick="updateModal('deleteTopicModalLink','{{the_url}}')">delete</a> delete topic?
         {% endfor %}
 
 

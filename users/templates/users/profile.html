@@ -1,0 +1,14 @@
+{% extends 'learming_logs_app/base.html' %}
+{% load bootstrap3 %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- <form action="{%url 'users:update_profile'%}" method="post" enctype="multipart/form-data"> -->
+    <!-- {% csrf_token %} -->
+    <img src="{{ image.url|default_if_none:"#" }}" alt="pic">
+    <!-- {{ user_form.as_p }}
+    {{ profile_form.as_p }} -->
+    <!-- <button type="submit">Save changes</button> -->
+</form>
+
+{% endblock content %}

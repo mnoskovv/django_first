@@ -9,7 +9,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from users.forms import UserForm, ProfileForm
-from users.models import Profile
+from learming_logs_app.models import Topic
+from django.contrib import messages
 
 def logout_view(request):
     logout(request)
@@ -33,21 +34,31 @@ def register(request):
 @login_required
 @transaction.atomic
 def update_profile(request):
-    # if request.method == 'POST':
-    #     user_form = UserForm(request.POST, instance=request.user)
-    #     profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-    #     if user_form.is_valid() and profile_form.is_valid():
-    #         user_form.save()
-    #         profile_form.save()
-    #         return HttpResponseRedirect(reverse('users:update_profile'))
-    # else:
-    #     user_form = UserForm(instance=request.user)
-    #     profile_form = ProfileForm(instance=request.user.profile)
-    # return render(request, 'users/profile.html', {
-    #     'user_form': user_form,
-    #     'profile_form': profile_form
-    # })
-    profile = request.user.profile
-    return render(request, 'users/profile.html', {
-        'image': profile.avatar,
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            messages.success(request, 'Form submission successful')
+            user_form.save()
+            profile_form.save()
+            return HttpResponseRedirect(reverse('users:update_profile'))
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'users/update_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
     })
+
+@login_required
+def profile(request):
+    user = request.user
+    profileData = request.user.profile
+    topics = Topic.objects.filter(owner = request.user).order_by('date_added')
+    context = {
+        'image': profileData.avatar,
+        'defaultImg': '/static/defaultUser.jpeg',
+        'institution': profileData.institution,
+        'topics': topics,
+    }
+    return render(request, 'users/profile.html', context)

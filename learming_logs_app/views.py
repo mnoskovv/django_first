@@ -59,7 +59,8 @@ def new_topic(request):
             new_topic = form.save(commit = False)
             new_topic.owner = request.user
             new_topic.save()
-            return HttpResponseRedirect(reverse('learming_logs_app:topics'))
+            # return HttpResponseRedirect(reverse('learming_logs_app:topics'))
+            return HttpResponseRedirect(reverse('users:profile'))
 
     context = {'form': form}
     return render(request, 'learming_logs_app/new_topic.html', context)
@@ -115,5 +116,5 @@ def delete_topic(request, topic_id):
 
     topic.delete()
 
-    return HttpResponseRedirect(reverse('learming_logs_app:topics'))
+    return HttpResponseRedirect(reverse('users:profile'))
 

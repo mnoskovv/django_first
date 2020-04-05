@@ -10,5 +10,6 @@ urlpatterns = [
     # logout page
     path("logout/", LogoutView.as_view(), name="logout"),
     path("register/", views.register, name="register"),
-    path("profile/", views.update_profile, name="update_profile"),
+    path("profile/", views.profile, name="profile"),
+    path("update_profile/", views.update_profile, name="update_profile"),
 ]

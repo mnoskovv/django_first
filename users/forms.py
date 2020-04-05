@@ -8,6 +8,7 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False, widget=forms.FileInput)
     class Meta:
         model = Profile
-        fields = ('bio', 'avatar',)
+        fields = ('institution', 'avatar',)

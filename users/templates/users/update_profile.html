@@ -1,0 +1,44 @@
+{% extends 'learming_logs_app/base.html' %}
+{% load bootstrap3 %}
+{% load widget_tweaks %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-sm-5">
+            <h2>Profile info</h2>
+            <form action="{% url 'users:update_profile' %}"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                        {{ user_form.first_name|add_class:"form-control"|attr:"id:firstName"|attr:"placeholder:Enter first name"|attr:"aria-describedby:firstNameHelp"}}
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last name</label>
+                        {{ user_form.last_name|add_class:"form-control"|attr:"id:last_name"|attr:"placeholder:Enter first name"|attr:"aria-describedby:lastNameHelp"}}
+                </div>
+                <div class="form-group">
+                    <label for="institution">Institution</label>
+                        {{ profile_form.institution|add_class:"form-control"|attr:"id:institution"|attr:"placeholder:Enter a place where you study"|attr:"aria-describedby:institutionHelp"}}
+                </div>
+                <div class="form-group">
+                    <label for="avatar">Profile photo</label>
+                        {{ profile_form.avatar|attr:"id:avatar" }}
+                </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+        <div class="col-sm-5">
+            <h2>Security settings</h2>
+            <p>in progress...</p>
+        </div>
+    </div>
+{% endblock content %}

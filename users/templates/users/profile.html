@@ -1,0 +1,51 @@
+{% extends 'learming_logs_app/base.html' %}
+{% load bootstrap3 %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-3">
+      <div class="thumbnail">
+        {% if image %}
+          <img src="{{ image.url }}" style="width:100%; max-width:250px;">
+        {% else %}
+          <img src="{{ defaultImg }}" style="width:100%; max-width:250px;">
+        {% endif %}
+        <div class="text-center"> 
+          <a href="{% url 'users:update_profile' %}" class="btn btn-info" style="width:100%; max-width:250px;" role="button">
+            settings
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+        </div> 
+        <div class="caption">
+          {% if user.first_name and user.last_name%}
+            <h3>{{user.first_name}} {{user.last_name}}</h3>
+          {% else %} 
+            <small><li>no name provided</li></small>
+          {%  endif %}
+          {% if institution %}
+            <p>{{institution}}</p>
+          {% else %}
+            <small><li>no institution provided</li></small>
+          {%  endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+        <h2>Your topics</h2>
+        <ul>
+            {% for topic in topics %}
+              <li>
+                <h4>
+                  <a href="{% url 'learming_logs_app:topic' topic.id %}">{{ topic }}</a>
+                </h4>
+              </li>
+            {% empty %}
+              <li>No topics have been added yet.</li>
+            {% endfor %}
+          </ul>
+          <h4><a href="{% url 'learming_logs_app:new_topic' %}"> Add a new topic</a></h4>
+    </div>
+  </div>
+
+{% endblock content %}

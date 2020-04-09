@@ -11,7 +11,10 @@ def get_image_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     institution = models.CharField(max_length=20, blank=True)
-    avatar = models.ImageField(upload_to='images/') 
+    avatar = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=User)
